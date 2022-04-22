@@ -31,6 +31,6 @@
     "incremental": true,
     "module": "esnext"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["."],
   "exclude": ["node_modules"]
 }

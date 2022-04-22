@@ -13,7 +13,16 @@ _global.mongo = _global.mongo || {}
 
 let indexesCreated = false
 async function createIndexes(db: Db) {
-  await Promise.all([])
+  await Promise.all([
+    db.collection('users').createIndexes([
+      {
+        key: { username: 1 },
+        unique: true,
+      },
+    ]),
+    db.collection('tokens').createIndex({ expireAt: -1 }, { expireAfterSeconds: 0 }),
+    db.collection('videos').createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+  ])
   indexesCreated = true
 }
 

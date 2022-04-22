@@ -1,6 +1,6 @@
 import { MongoClient, Db } from 'mongodb'
 import { NextFunction } from 'express'
-import { IRequest, IResponse } from '../interfaces'
+import { IRequest, IResponse } from '@interfaces'
 
 /**
  * Global is used here to maintain a cached connection across hot reloads
@@ -38,7 +38,6 @@ export async function database(req: IRequest, res: IResponse, next: NextFunction
   }
   req.dbClient = await getMongoClient()
   req.db = req.dbClient.db() // this use the database specified in the MONGODB_URI (after the "/")
-  req.db.myId = process.env.CURRENT_USER_ID?.toString() || ''
   if (!indexesCreated) await createIndexes(req.db)
   if (res) {
   }

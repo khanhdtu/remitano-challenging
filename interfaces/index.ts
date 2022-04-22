@@ -1,3 +1,6 @@
 export * from './IRequest'
 export * from './IResponse'
 export * from './INext'
+export * from './IDatabase'
+export * from './IResult'
+export * from './IUser'

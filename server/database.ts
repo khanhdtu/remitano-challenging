@@ -13,11 +13,7 @@ _global.mongo = _global.mongo || {}
 
 let indexesCreated = false
 async function createIndexes(db: Db) {
-  await Promise.all([
-    db.collection('liked-posts').createIndexes([{ key: { postId: 1, myId: 1 }, unique: true }]),
-    db.collection('liked-users').createIndexes([{ key: { userId: 1, myId: 1 }, unique: true }]),
-    db.collection('matched-users').createIndexes([{ key: { userId: 1, myId: 1 }, unique: true }]),
-  ])
+  await Promise.all([])
   indexesCreated = true
 }
 

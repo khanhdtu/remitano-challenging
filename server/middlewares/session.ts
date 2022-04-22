@@ -2,7 +2,7 @@ import { INext, IRequest, IResponse } from '@interfaces'
 import MongoStore from 'connect-mongo'
 import nextSession from 'next-session'
 import { promisifyStore } from 'next-session/lib/compat'
-import { getMongoClient } from './database'
+import { getMongoClient } from '../database'
 
 const mongoStore = MongoStore.create({
   clientPromise: getMongoClient(),

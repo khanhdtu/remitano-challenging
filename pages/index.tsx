@@ -2,8 +2,16 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '@styles/Home.module.css'
+import { useCurrentUser } from '@services/queries'
+import { useFetchCurrentUser } from '@services/mutations'
+import { useEffect } from 'react'
 
 const Home: NextPage = () => {
+  const { mutate: fetchUser } = useFetchCurrentUser()
+  const { data: user } = useCurrentUser()
+  console.log(user)
+  useEffect(() => fetchUser(), [])
+
   return (
     <div className={styles.container}>
       <Head>

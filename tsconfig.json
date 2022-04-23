@@ -21,12 +21,13 @@
     "baseUrl": ".",
     "paths": {
       "@server/*": ["server/*"],
+      "@server-middlewares": ["server/middlewares/index"],
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
       "@interfaces": ["interfaces/index"],
-      "@utils": ["untils/index"]
+      "@utils": ["utils/index"]
     },
     "incremental": true,
     "module": "esnext"

@@ -1,25 +1,28 @@
-import { IDatabase } from '@interfaces'
-import { IToken } from 'interfaces/IToken'
-import { nanoid } from 'nanoid'
+import { IUser } from '@interfaces'
+import jwt from 'jsonwebtoken'
+import { expressjwt } from 'express-jwt'
 
-export function findTokenByIdAndType(db: IDatabase, _id: string) {
-  return db.collection('tokens').findOne({ _id })
+const { JWT_SCRET } = process.env
+const BACKUP_JWT_SCRET = 'remitano-scret'
+const algorithm = 'HS256'
+const expiresIn = 3600
+
+export function generateToken(user: IUser) {
+  return jwt.sign(
+    {
+      username: user.username,
+      password: user.password,
+    },
+    JWT_SCRET || BACKUP_JWT_SCRET,
+    { algorithm, expiresIn },
+  )
 }
 
-export function findAndDeleteTokenByIdAndType(db: IDatabase, _id: string) {
-  return db
-    .collection('tokens')
-    .deleteOne({ _id })
-    .then(({ deletedCount }) => deletedCount)
+export function verifyToken(token: string) {
+  const verified = jwt.verify(token, JWT_SCRET || BACKUP_JWT_SCRET)
+  return verified
 }
 
-export async function createToken(db: IDatabase, token: IToken) {
-  const securedTokenId = nanoid(32)
-  const _token: IToken = {
-    _id: securedTokenId as any,
-    creatorId: token.creatorId,
-    expireAt: token.expireAt,
-  }
-  await db.collection('tokens').insertOne(_token)
-  return token
+export function prevented() {
+  return expressjwt({ secret: JWT_SCRET || BACKUP_JWT_SCRET, algorithms: [algorithm] })
 }

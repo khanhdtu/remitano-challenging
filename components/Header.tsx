@@ -2,7 +2,6 @@ import { IUser } from '@interfaces'
 import { useState } from 'react'
 import { Box, Flex, Image, Text, Input, Button, Link } from 'theme-ui'
 import { useSignInMutation, useSignOutMutation, useSignUpMutation } from '@mutations'
-import { removeToken } from '@utils'
 import { useRouter } from 'next/router'
 
 type HeaderProps = {

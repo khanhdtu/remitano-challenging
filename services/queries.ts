@@ -8,5 +8,5 @@ export function useCurrentUser() {
 }
 
 export function useGetVideos() {
-  return useQuery('get-videos', () => request.get<IResult<IVideo>>('videos'))
+  return useQuery('get-videos', () => request.get<IResult<IVideo[]>>('videos'))
 }

@@ -101,6 +101,7 @@ handler.patch(
 // Sign Out
 handler.delete(prevented(), async (req: IRequest, res: IResponse) => {
   // await req.session.destroy()
+  req.accepted
   res.json({
     success: true,
     data: null,

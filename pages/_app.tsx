@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import { Hydrate, QueryClient, QueryClientProvider } from 'react-query'
 import { ThemeProvider } from 'theme-ui'
 import { Toaster } from 'react-hot-toast'
-import { theme } from './theme'
+import { theme } from 'utils'
 
 const queryClient = new QueryClient({
   defaultOptions: {

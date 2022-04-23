@@ -65,7 +65,6 @@ export function useSignOutMutation() {
 }
 
 export function useShareMutation() {
-  const queryClient = useQueryClient()
   return useMutation((videoUrl: string) => request.post<IResult<IVideo>>('videos', { videoUrl }), {
     onSuccess: res => {
       if (res && !res.data.success) {

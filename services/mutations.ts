@@ -69,12 +69,9 @@ export function useShareMutation() {
   return useMutation((videoUrl: string) => request.post<IResult<IVideo>>('videos', { videoUrl }), {
     onSuccess: res => {
       if (res && !res.data.success) {
-        toast.error(res.data.message || '', {
-          position: 'top-right',
-        })
+        toast.error(res.data.message || '')
       } else {
-        console.log(res.data)
-        // queryClient.setQueryData('get-current-user', null)
+        toast.success(res.data.message || '')
       }
     },
   })

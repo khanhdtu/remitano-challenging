@@ -21,9 +21,10 @@
     "baseUrl": ".",
     "paths": {
       "@server/*": ["server/*"],
-      "@server-middlewares": ["server/middlewares/index"],
       "@components/*": ["components/*"],
       "@services/*": ["services/*"],
+      "@queries": ["services/queries.ts"],
+      "@mutations": ["services/mutations.ts"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
       "@interfaces": ["interfaces/index"],

@@ -17,7 +17,7 @@ function RemitanoChallengingApplication({ Component, pageProps }: AppProps) {
       <Hydrate state={pageProps.dehydratedState}>
         <ThemeProvider theme={theme}>
           <Component {...pageProps} />
-          <Toaster />
+          <Toaster position='top-right' />
         </ThemeProvider>
       </Hydrate>
     </QueryClientProvider>

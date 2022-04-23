@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'react-hot-toast'
 
 const request = axios.create({
   baseURL: 'api',
@@ -18,8 +19,15 @@ request.interceptors.request.use(
 )
 
 request.interceptors.response.use(
-  response => response.data || response,
-  error => error,
+  response => response,
+  error => {
+    if (error.message) {
+      toast(error.message)
+    } else {
+      toast(error.response.message)
+    }
+    return error
+  },
 )
 
 export { request }

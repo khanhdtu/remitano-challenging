@@ -10,6 +10,7 @@ const expiresIn = 3600
 export function generateToken(user: IUser) {
   return jwt.sign(
     {
+      _id: user._id,
       username: user.username,
       password: user.password,
     },

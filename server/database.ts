@@ -20,8 +20,12 @@ async function createIndexes(db: Db) {
         unique: true,
       },
     ]),
-    db.collection('tokens').createIndex({ expireAt: -1 }, { expireAfterSeconds: 0 }),
-    db.collection('videos').createIndexes([{ key: { createdAt: -1 } }, { key: { creatorId: -1 } }]),
+    db.collection('videos').createIndexes([
+      {
+        key: { videoUrl: 1 },
+        unique: true,
+      },
+    ]),
   ])
   indexesCreated = true
 }

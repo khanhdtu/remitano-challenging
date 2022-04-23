@@ -11,6 +11,7 @@ const handler = nc(nextConnOps)
 
 handler.use(database, ...auth)
 
+// Fetch current user
 handler.get(prevented(), (req: IRequest, res: IResponse) => {
   res.json({
     success: true,
@@ -18,6 +19,7 @@ handler.get(prevented(), (req: IRequest, res: IResponse) => {
   })
 })
 
+// Sign Up
 handler.post(
   validateBody({
     type: 'object',
@@ -48,6 +50,7 @@ handler.post(
         data: {
           ...newUser,
           token: generateToken({
+            _id: newUser._id,
             username,
             password,
           }),
@@ -88,7 +91,7 @@ handler.patch(
         success: true,
         data: {
           username,
-          token: generateToken({ username, password }),
+          token: generateToken({ _id: found._id, username, password }),
         },
       })
     }

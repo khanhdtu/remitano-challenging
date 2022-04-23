@@ -23,6 +23,14 @@ export function verifyToken(token: string) {
   return verified
 }
 
+export function decodeToken(bearerToken: string) {
+  const token = bearerToken.split(' ')[1]
+  const decoded = jwt.decode(token) as IUser
+  return {
+    username: decoded.username,
+  }
+}
+
 export function prevented() {
   return expressjwt({ secret: JWT_SCRET || BACKUP_JWT_SCRET, algorithms: [algorithm] })
 }

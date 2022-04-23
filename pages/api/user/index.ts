@@ -3,7 +3,7 @@ import { nextConnOps } from '@server/next-connection'
 import { database } from '@server/database'
 import nc from 'next-connect'
 import { IRequest, IResponse } from '@interfaces'
-import { generateToken, prevented } from '@server/services/token'
+import { generateToken, prevented, decodeToken } from '@server/services/token'
 import { findUserByUsernameAndPassword, findUserByUsername, insertUser } from '@server/services/user'
 import { validateBody } from '@server/middlewares'
 
@@ -11,13 +11,10 @@ const handler = nc(nextConnOps)
 
 handler.use(database, ...auth)
 
-handler.get((req: IRequest, res: IResponse) => {
-  req.accepted
+handler.get(prevented(), (req: IRequest, res: IResponse) => {
   res.json({
     success: true,
-    data: {
-      username: 'khanh',
-    },
+    data: decodeToken(req.headers.authorization || ''),
   })
 })
 

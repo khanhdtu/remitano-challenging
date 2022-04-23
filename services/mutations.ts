@@ -3,6 +3,7 @@ import { request } from '@utils'
 import { IResult, IUser } from '@interfaces'
 import { toast } from 'react-hot-toast'
 import { setToken, removeToken } from '@utils'
+import { IVideo } from 'interfaces/IVideo'
 
 export function useFetchCurrentUserMutation() {
   const queryClient = useQueryClient()
@@ -58,6 +59,22 @@ export function useSignOutMutation() {
       } else {
         queryClient.setQueryData('get-current-user', null)
         removeToken()
+      }
+    },
+  })
+}
+
+export function useShareMutation() {
+  const queryClient = useQueryClient()
+  return useMutation((videoUrl: string) => request.post<IResult<IVideo>>('videos', { videoUrl }), {
+    onSuccess: res => {
+      if (res && !res.data.success) {
+        toast.error(res.data.message || '', {
+          position: 'top-right',
+        })
+      } else {
+        console.log(res.data)
+        // queryClient.setQueryData('get-current-user', null)
       }
     },
   })

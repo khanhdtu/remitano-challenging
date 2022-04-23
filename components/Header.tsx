@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { Box, Flex, Image, Text, Input, Button, Link } from 'theme-ui'
 import { useSignInMutation, useSignOutMutation, useSignUpMutation } from '@mutations'
 import { removeToken } from '@utils'
+import { useRouter } from 'next/router'
 
 type HeaderProps = {
   user?: IUser
@@ -12,6 +13,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
   const { mutate: onSignIn } = useSignInMutation()
   const { mutate: onSignUp } = useSignUpMutation()
   const { mutate: onSignOut } = useSignOutMutation()
+  const { replace } = useRouter()
   const [user, setUser] = useState<IUser>({
     username: '',
     password: '',
@@ -23,7 +25,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
 
   return (
     <Box sx={{ display: 'flex', alignItems: 'center', height: 60 }}>
-      <Flex sx={{ height: '100%', width: 360, alignItems: 'center', gap: 2 }}>
+      <Flex sx={{ height: '100%', width: 360, alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => replace('/')}>
         <Image src='home.svg' alt='fav icon' sx={{ width: 50 }} />
         <Text sx={{ color: 'primary', fontSize: 'xxl' }}>Funny Videos</Text>
       </Flex>
@@ -46,7 +48,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
       ) : (
         <Flex sx={{ alignItems: 'center', gap: 3 }}>
           <Text>Welcome {props.user?.username}</Text>
-          <Button>Share a movie</Button>
+          <Button onClick={() => replace('share')}>Share a movie</Button>
           <Link onClick={() => onSignOut()}>Logout</Link>
         </Flex>
       )}

@@ -16,7 +16,7 @@ const Layout: NextPage = props => {
   return (
     <Box className={styles.container}>
       <Header user={user} />
-      {props.children}
+      {user?.username ? props.children : null}
     </Box>
   )
 }

@@ -3,8 +3,8 @@ import { nextConnOps } from '@server/next-connection'
 import { database } from '@server/database'
 import nc from 'next-connect'
 import { IRequest, IResponse } from '@interfaces'
-import { findVideos } from '@server/services/video'
-import { prevented } from '@server/services/token'
+import { findVideos, shareVideo } from '@server/services/video'
+import { prevented, decodeToken } from '@server/services/token'
 import { validateBody } from '@server/middlewares'
 
 const handler = nc(nextConnOps)
@@ -28,7 +28,16 @@ handler.post(
     },
   }),
   async (req: IRequest, res: IResponse) => {
-    res.json('ok')
+    const userId = decodeToken(req.headers.authorization || '')._id
+    const shared = await shareVideo(req.db, {
+      videoUrl: req.body.videoUrl,
+      creatorId: userId,
+    })
+    res.json({
+      success: true,
+      data: shared,
+      message: 'Your video has been shared successfully.',
+    })
   },
 )
 

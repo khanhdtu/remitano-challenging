@@ -28,6 +28,7 @@ export function decodeToken(bearerToken: string) {
   const token = bearerToken.split(' ')[1]
   const decoded = jwt.decode(token) as IUser
   return {
+    _id: decoded._id,
     username: decoded.username,
   }
 }

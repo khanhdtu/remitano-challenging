@@ -2,7 +2,7 @@ import { IDatabase, IUser } from '@interfaces'
 import bcrypt from 'bcryptjs'
 import { ObjectId } from 'mongodb'
 
-export async function findUserWithUsernameAndPassword(db: IDatabase, user: IUser) {
+export async function findUserByUsernameAndPassword(db: IDatabase, user: IUser) {
   const userFound = await db.collection<IUser>('users').findOne({ username: user.username })
   if (userFound && (await bcrypt.compare(user.password ?? '', userFound.password ?? ''))) {
     userFound.password = undefined // filtered out password
@@ -36,6 +36,7 @@ export async function insertUser(db: IDatabase, user: IUser) {
   const password = await bcrypt.hash(user.password ?? '', 10)
   const { insertedId } = await db.collection('users').insertOne({ ...user, password })
   user._id = insertedId
+  user.password = undefined
   return user
 }
 

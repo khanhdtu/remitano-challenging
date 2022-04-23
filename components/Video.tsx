@@ -6,7 +6,7 @@ export const Video = (props: IVideo): JSX.Element => {
     return url.replace('/watch', '/embed')
   }
   return (
-    <Box sx={{ display: 'inline-flex', gap: 2 }}>
+    <Box className='video-item' sx={{ display: 'inline-flex', gap: 2 }}>
       <Flex>
         <iframe title='unknown title' src={generateEmbebUrl(props.videoUrl)} allowFullScreen></iframe>
       </Flex>

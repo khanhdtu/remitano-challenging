@@ -8,7 +8,7 @@ const Home: NextPage = () => {
   const { data: videos } = useGetVideos()
   return (
     <Layout>
-      <Box sx={{ p: 3, textAlign: 'center' }}>
+      <Box className='video-items' sx={{ p: 3, textAlign: 'center' }}>
         {videos?.data.data.map(video => (
           <Video key={video._id?.toString()} {...video} />
         ))}

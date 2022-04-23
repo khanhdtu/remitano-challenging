@@ -23,7 +23,7 @@ export const Header = (props: HeaderProps): JSX.Element => {
   }
 
   return (
-    <Box sx={{ display: 'flex', alignItems: 'center', height: 60 }}>
+    <Box className='headear' sx={{ display: 'flex', alignItems: 'center', height: 60 }}>
       <Flex sx={{ height: '100%', width: 360, alignItems: 'center', gap: 2, cursor: 'pointer' }} onClick={() => replace('/')}>
         <Image src='home.svg' alt='fav icon' sx={{ width: 50 }} />
         <Text sx={{ color: 'primary', fontSize: 'xxl' }}>Funny Videos</Text>
